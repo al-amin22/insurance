@@ -9,6 +9,13 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}" />
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,
+    %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E
+    %3Cpath fill='%230d6efd' d='M32 2C18 10 6 14 6 26s10 30 26 36c16-6 26-24 26-36S46 10 32 2z'/%3E
+    %3Cpath fill='white' d='M32 18a8 8 0 0 1 8 8h-4a4 4 0 0 0-8 0c0 4 8 4 8 10v2h-4v-2c0-2-8-2-8-10a8 8 0 0 1 8-8z'/%3E
+    %3C/svg%3E" type="image/svg+xml">
+
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
