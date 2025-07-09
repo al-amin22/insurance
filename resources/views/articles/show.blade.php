@@ -75,9 +75,14 @@
                 </header>
 
                 <!-- Article Content -->
-                <div class="article-content mb-5">
-                    {!! Str::markdown($article->content) !!}
+                <div class="container my-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body article-content">
+                            {!! Str::markdown($article->content) !!}
+                        </div>
+                    </div>
                 </div>
+
 
                 <!-- Article Footer -->
                 <footer class="border-top pt-4 mb-5">
