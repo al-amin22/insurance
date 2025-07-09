@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@php
+use Illuminate\Support\Str;
+@endphp
 @section('title', $article->title)
 @section('meta_description', $article->description)
 @section('meta_keywords', $article->keywords)
@@ -9,9 +11,8 @@
     .article-content h1,
     .article-content h2,
     .article-content h3 {
+        font-weight: bold;
         margin-top: 1.5rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
     }
 
     .article-content p {
@@ -21,26 +22,16 @@
 
     .article-content ul,
     .article-content ol {
-        padding-left: 2rem;
+        padding-left: 1.5rem;
         margin-bottom: 1rem;
     }
 
     .article-content li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.3rem;
     }
 
     .article-content a {
         color: #0d6efd;
-        text-decoration: underline;
-    }
-
-    .article-content a:hover {
-        color: #0a58ca;
-        text-decoration: none;
-    }
-
-    .article-content strong {
-        font-weight: bold;
     }
 </style>
 
@@ -78,7 +69,7 @@
                 <div class="container my-5">
                     <div class="card shadow-sm">
                         <div class="card-body article-content">
-                            {!! Str::markdown($article->content) !!}
+                            {!! $renderedContent !!}
                         </div>
                     </div>
                 </div>

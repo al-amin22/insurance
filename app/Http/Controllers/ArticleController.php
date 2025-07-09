@@ -9,6 +9,7 @@ use Illuminate\Http\InsuranceCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use League\CommonMark\CommonMarkConverter;
 
 
 class ArticleController extends Controller
@@ -23,16 +24,12 @@ class ArticleController extends Controller
      */
     public function show($country, $category_slug, $article_slug)
     {
-        // Convert country parameter to lowercase for consistency
         $country = strtolower($country);
-
-        // Validate country code
         $validCountries = ['us', 'gb', 'ca', 'au', 'de', 'jp'];
         if (!in_array($country, $validCountries)) {
             abort(404);
         }
 
-        // Find article with uppercase country in database
         $article = InsuranceArticle::with(['category', 'relatedArticles'])
             ->where('country', strtoupper($country))
             ->where('slug', $article_slug)
@@ -41,17 +38,14 @@ class ArticleController extends Controller
             })
             ->firstOrFail();
 
-        // Increment visit count
         $article->increment('visit_count');
 
-        // Get popular articles in the same country
         $popularArticles = InsuranceArticle::where('country', strtoupper($country))
             ->where('id', '!=', $article->id)
             ->orderBy('visit_count', 'desc')
             ->take(5)
             ->get();
 
-        // Get categories for sidebar
         $sidebarCategories = ModelsInsuranceCategory::withCount(['articles' => function ($query) use ($country) {
             $query->where('country', strtoupper($country));
         }])
@@ -59,13 +53,19 @@ class ArticleController extends Controller
             ->take(10)
             ->get();
 
+        // ✅ Render Markdown di Controller
+        $converter = new CommonMarkConverter();
+        $renderedContent = $converter->convertToHtml($article->content);
+
         return view('articles.show', [
             'article' => $article,
+            'renderedContent' => $renderedContent,
             'popularArticles' => $popularArticles,
             'sidebarCategories' => $sidebarCategories,
-            'country' => $country // lowercase for URLs
+            'country' => $country
         ]);
     }
+
 
     /**
      * Display articles by country.
