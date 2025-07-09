@@ -22,6 +22,18 @@ class ArticleController extends Controller
      * @param  string  $article_slug
      * @return \Illuminate\Http\Response
      */
+    private function clean_markdown_ai(string $markdown): string
+    {
+        $markdown = str_replace("\r", '', $markdown);
+        $markdown = preg_replace('/(#+ .+)\n(?!\n)/', "$1\n\n", $markdown);
+        $markdown = preg_replace('/([^\n])(\n\* )/', "$1\n$2", $markdown);
+        $markdown = preg_replace('/(\* .+)\n(?!\*)/', "$1\n\n", $markdown);
+        $markdown = str_replace("\t", '', $markdown);
+        $markdown = preg_replace("/\n{3,}/", "\n\n", $markdown);
+        $markdown = preg_replace("/[ \t]+$/m", '', $markdown);
+        return trim($markdown);
+    }
+
     public function show($country, $category_slug, $article_slug)
     {
         $country = strtolower($country);
@@ -53,9 +65,10 @@ class ArticleController extends Controller
             ->take(10)
             ->get();
 
-        // ✅ Render Markdown di Controller
+        // ✅ Render markdown setelah dibersihkan
         $converter = new CommonMarkConverter();
-        $renderedContent = $converter->convertToHtml($article->content);
+        $cleanContent = $this->clean_markdown_ai($article->content);
+        $renderedContent = $converter->convertToHtml($cleanContent);
 
         return view('articles.show', [
             'article' => $article,
@@ -65,6 +78,7 @@ class ArticleController extends Controller
             'country' => $country
         ]);
     }
+
 
 
     /**
