@@ -8,6 +8,9 @@ use App\Models\InsuranceCategory as ModelsInsuranceCategory;
 use Illuminate\Http\InsuranceCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+
+
 class ArticleController extends Controller
 {
     /**

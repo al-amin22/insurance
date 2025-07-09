@@ -5,6 +5,45 @@
 @section('meta_keywords', $article->keywords)
 @section('og_image', asset($article->image_path))
 
+<style>
+    .article-content h1,
+    .article-content h2,
+    .article-content h3 {
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .article-content p {
+        margin-bottom: 1rem;
+        line-height: 1.7;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .article-content li {
+        margin-bottom: 0.5rem;
+    }
+
+    .article-content a {
+        color: #0d6efd;
+        text-decoration: underline;
+    }
+
+    .article-content a:hover {
+        color: #0a58ca;
+        text-decoration: none;
+    }
+
+    .article-content strong {
+        font-weight: bold;
+    }
+</style>
+
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
 <li class="breadcrumb-item"><a href="{{ route('articles.by_country', ['country' => strtolower($article->country)]) }}">{{ strtoupper($article->country) }}</a></li>
