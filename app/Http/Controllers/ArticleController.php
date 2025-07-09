@@ -24,15 +24,33 @@ class ArticleController extends Controller
      */
     private function clean_markdown_ai(string $markdown): string
     {
+        // Hapus kode block ` ```markdown ... ``` `
+        $markdown = preg_replace('/```markdown\s*(.*?)```/s', '$1', $markdown);
+
+        // Normalisasi line ending
         $markdown = str_replace("\r", '', $markdown);
+
+        // Tambahkan baris kosong setelah heading jika belum ada
         $markdown = preg_replace('/(#+ .+)\n(?!\n)/', "$1\n\n", $markdown);
+
+        // Tambahkan baris kosong sebelum list jika langsung menempel
         $markdown = preg_replace('/([^\n])(\n\* )/', "$1\n$2", $markdown);
+
+        // Tambahkan baris kosong setelah list
         $markdown = preg_replace('/(\* .+)\n(?!\*)/', "$1\n\n", $markdown);
+
+        // Hapus tab
         $markdown = str_replace("\t", '', $markdown);
+
+        // Normalisasi newline
         $markdown = preg_replace("/\n{3,}/", "\n\n", $markdown);
+
+        // Hapus trailing whitespace
         $markdown = preg_replace("/[ \t]+$/m", '', $markdown);
+
         return trim($markdown);
     }
+
 
     public function show($country, $category_slug, $article_slug)
     {
@@ -68,6 +86,7 @@ class ArticleController extends Controller
         // ✅ Render markdown setelah dibersihkan
         $converter = new CommonMarkConverter();
         $cleanContent = $this->clean_markdown_ai($article->content);
+        // dd($cleanContent);
         $renderedContent = $converter->convertToHtml($cleanContent);
 
         return view('articles.show', [

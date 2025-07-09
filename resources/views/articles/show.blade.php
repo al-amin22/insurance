@@ -35,6 +35,7 @@ use Illuminate\Support\Str;
     }
 </style>
 
+
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
 <li class="breadcrumb-item"><a href="{{ route('articles.by_country', ['country' => strtolower($article->country)]) }}">{{ strtoupper($article->country) }}</a></li>
