@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\InsuranceCategory as ModelsInsuranceCategory;
 use Illuminate\Http\InsuranceCategory;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
 class ArticleController extends Controller
 {
     /**
@@ -158,5 +158,52 @@ class ArticleController extends Controller
             'results' => $results,
             'searchQuery' => $query
         ]);
+    }
+
+    public function upload(Request $request)
+    {
+        try {
+            // Validasi format file
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,jpg|max:2048',
+            ]);
+
+            $file = $request->file('image');
+            $extension = strtolower($file->getClientOriginalExtension());
+
+            // Tolak jika bukan .jpg atau .jpeg
+            if (!in_array($extension, ['jpg', 'jpeg'])) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Only .jpg or .jpeg files are allowed.',
+                ], 400);
+            }
+
+            // Buat folder uploads jika belum ada
+            $uploadPath = public_path('uploads');
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true);
+            }
+
+            // Generate nama file unik
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $originalName = pathinfo($request->file('image')->getClientOriginalName(), PATHINFO_FILENAME);
+            $fileName = time() . '_' . $originalName . '.' . $extension;
+
+
+            // Simpan file
+            $file->move($uploadPath, $fileName);
+
+            return response()->json([
+                'success' => true,
+                'path' => asset("uploads/$fileName"),
+                'url' => url("uploads/$fileName")
+            ], 200, [], JSON_UNESCAPED_SLASHES);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
