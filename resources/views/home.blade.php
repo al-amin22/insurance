@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Insurance Guides & Expert Comparisons - coverinsight.com')
+@section('title', 'Insurance Guides & If - coverinsight.com')
 @section('meta_description', 'Trusted insurance guides for health, auto, home, and life insurance in US, UK, Canada, Australia, Germany & Japan. Expert comparisons to help you save.')
 @section('meta_keywords', 'insurance guide, compare insurance, health insurance, car insurance, home insurance, life insurance, insurance tips, US insurance, UK insurance, Canada insurance')
 
@@ -136,6 +136,11 @@
                         str_contains(strtolower($category->name), 'travel') => 'fas fa-plane',
                         str_contains(strtolower($category->name), 'pet') => 'fas fa-paw',
                         str_contains(strtolower($category->name), 'business') => 'fas fa-briefcase',
+                        str_contains(strtolower($category->name), 'liability') => 'fas fa-balance-scale',
+                        str_contains(strtolower($category->name), 'disability') => 'fas fa-wheelchair',
+                        str_contains(strtolower($category->name), 'comparison') => 'fas fa-exchange-alt',
+                        str_contains(strtolower($category->name), 'tips') => 'fas fa-lightbulb',
+                        str_contains(strtolower($category->name), 'news') => 'fas fa-newspaper',
                         default => 'fas fa-file-alt'
                         };
                         @endphp

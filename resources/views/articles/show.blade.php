@@ -68,37 +68,6 @@
                     </div>
                 </footer>
 
-                <!-- Related Articles -->
-                @if($article->relatedArticles->count())
-                <section class="related-articles mb-5">
-                    <h2 class="h4 fw-bold mb-4 pb-2 border-bottom">Related Articles</h2>
-                    <div class="row g-4">
-                        @foreach($article->relatedArticles as $related)
-                        <div class="col-md-6">
-                            <div class="card h-100 border-0 shadow-sm">
-                                <a href="{{ route('articles.show', [
-                                    'country' => strtolower($related->country),
-                                    'category_slug' => $related->category->slug,
-                                    'article_slug' => $related->slug
-                                ]) }}" class="text-decoration-none">
-                                    @if($related->image_path)
-                                    <img src="{{ asset($related->image_path) }}" class="card-img-top" alt="{{ $related->title }}" style="height: 180px; object-fit: cover;">
-                                    @endif
-                                    <div class="card-body">
-                                        <h3 class="h6 card-title">{{ $related->title }}</h3>
-                                        <p class="card-text text-muted small">{{ Str::limit($related->description, 80) }}</p>
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top-0 pt-0">
-                                        <small class="text-muted">{{ $related->created_at->diffForHumans() }}</small>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </section>
-                @endif
-
                 <!-- Comments Section -->
                 <section class="comments-section mb-5">
                     <h2 class="h4 fw-bold mb-4 pb-2 border-bottom">Comments</h2>
@@ -109,6 +78,34 @@
             <!-- Sidebar -->
             <div class="col-lg-4">
                 <div class="sticky-top" style="top: 20px;">
+                    <!-- Related Articles -->
+                    @if($article->relatedArticles->count())
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="h6 mb-0">Related Articles</h3>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            @foreach($article->relatedArticles as $related)
+                            <a href="{{ route('articles.show', [
+                                'country' => strtolower($related->country),
+                                'category_slug' => $related->category->slug,
+                                'article_slug' => $related->slug
+                            ]) }}" class="list-group-item list-group-item-action">
+                                <div class="d-flex align-items-center">
+                                    @if($related->image_path)
+                                    <img src="{{ asset($related->image_path) }}" class="rounded me-3" width="60" height="60" alt="{{ $related->title }}">
+                                    @endif
+                                    <div>
+                                        <h4 class="h6 mb-1">{{ Str::limit($related->title, 50) }}</h4>
+                                        <small class="text-muted">{{ $related->created_at->diffForHumans() }}</small>
+                                    </div>
+                                </div>
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
                     <!-- Popular Articles -->
                     <div class="card mb-4 border-0 shadow-sm">
                         <div class="card-header bg-primary text-white">
@@ -120,7 +117,7 @@
                                     'country' => strtolower($popular->country),
                                     'category_slug' => $popular->category->slug,
                                     'article_slug' => $popular->slug
-                                ]) }}" class="text-decoration-none">
+                                ]) }}" class="list-group-item list-group-item-action">
                                 <div class="d-flex align-items-center">
                                     @if($popular->image_path)
                                     <img src="{{ asset($popular->image_path) }}" class="rounded me-3" width="60" height="60" alt="{{ $popular->title }}">
