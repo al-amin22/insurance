@@ -27,7 +27,6 @@ class SitemapController extends Controller
             ->header('Content-Type', 'application/xml');
     }
 
-
     public function articles($page)
     {
         $perPage = 1000;

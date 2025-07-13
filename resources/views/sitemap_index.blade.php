@@ -58,6 +58,7 @@
     {{-- Category per country --}}
     @foreach ($countries as $country)
     @foreach ($categories as $category)
+    @if(isset($category->slug))
     <url>
         <loc>{{ url(strtolower($country) . '/category/' . $category->slug) }}</loc>
         @if($category->updated_at)
@@ -66,8 +67,10 @@
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
+    @endif
     @endforeach
     @endforeach
+
 
     {{-- Articles --}}
     @foreach ($articles as $article)
