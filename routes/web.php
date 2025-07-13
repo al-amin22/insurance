@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SitemapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,11 @@ use App\Http\Controllers\NewsletterController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 Route::get('/search', [ArticleController::class, 'search'])->name('search');
+// sitemap index
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+Route::get('/sitemap-articles-{page}.xml', [SitemapController::class, 'articles']);
+Route::get('/generate-sitemap-file', [SitemapController::class, 'generateAndSave']);
+
 // Article routes
 Route::prefix('{country}')->group(function () {
     // Articles by country
