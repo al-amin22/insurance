@@ -20,13 +20,13 @@ use App\Http\Controllers\SitemapController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
-Route::get('/search', [ArticleController::class, 'search'])->name('search');
-// sitemap index
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 Route::get('/sitemap-articles-{page}.xml', [SitemapController::class, 'articles']);
 Route::get('/generate-sitemap-file', [SitemapController::class, 'generateAndSave']);
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::get('/search', [ArticleController::class, 'search'])->name('search');
 
 // Article routes
 Route::prefix('{country}')->group(function () {
