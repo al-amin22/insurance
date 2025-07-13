@@ -4,34 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('meta_description', 'Comprehensive insurance guides, comparisons and tips for health, auto, home and life insurance')">
-    <meta name="keywords" content="@yield('meta_keywords', 'insurance, health insurance, car insurance, home insurance, life insurance, insurance comparison')">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>@yield('title', $meta['title'] ?? 'Insurance Information & Simple Insurance 2025')</title>
+    <meta name="description" content="@yield('description', $meta['description'] ?? 'insurance Information, Simple Insurance, comparisons and expert tips for health, auto, home and life insurance. Get the best coverage advice for 2025.')">
+    <meta name="keywords" content="@yield('keywords', $meta['keywords'] ?? 'Insurance Information, health insurance, car insurance, home insurance, life insurance, insurance comparison, pet insurance, travel insurance, disability insurance, leability insurance, best insurance 2025, coverage advice, tips insurance, news insurance')">
+    <meta name="author" content="coverinsight.com">
+    <meta name="theme-color" content="#0d6efd">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ url()->current() }}" />
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,
-    %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E
-    %3Cpath fill='%230d6efd' d='M32 2C18 10 6 14 6 26s10 30 26 36c16-6 26-24 26-36S46 10 32 2z'/%3E
-    %3Cpath fill='white' d='M32 18a8 8 0 0 1 8 8h-4a4 4 0 0 0-8 0c0 4 8 4 8 10v2h-4v-2c0-2-8-2-8-10a8 8 0 0 1 8-8z'/%3E
-    %3C/svg%3E" type="image/svg+xml">
-
+    <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="@yield('og_type', $meta['og_type'] ?? 'website')">
+    <meta property="og:title" content="@yield('og_title', $meta['og_title'] ?? 'Insurance Information & Comparisons 2025 – coverinsight.com')">
+    <meta property="og:description" content="@yield('og_description', $meta['og_description'] ?? 'Expert Insurance Information and comparisons to help you find the best coverage for your needs in 2025.')">
+    <meta property="og:image" content="@yield('og_image', $meta['og_image'] ?? asset('images/og-coverinsight2025.jpg'))">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'Insurance Guides - coverinsight.com')">
-    <meta property="og:description" content="@yield('meta_description', 'Comprehensive insurance guides and comparisons')">
-    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta property="og:site_name" content="coverinsight.com">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ url()->current() }}">
-    <meta property="twitter:title" content="@yield('title', 'Insurance Guides - coverinsight.com')">
-    <meta property="twitter:description" content="@yield('meta_description', 'Comprehensive insurance guides and comparisons')">
-    <meta property="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('twitter_title', $meta['twitter_title'] ?? 'Insurance Information & Comparisons 2025 – coverinsight.com')">
+    <meta name="twitter:description" content="@yield('twitter_description', $meta['twitter_description'] ?? 'Get expert advice on health, auto, home and life insurance. Compare plans and find the best coverage for 2025.')">
+    <meta name="twitter:image" content="@yield('twitter_image', $meta['twitter_image'] ?? asset('images/twitter-coverinsight2025.jpg'))">
+    <meta name="twitter:site" content="@coverinsight">
 
-    <title>@yield('title', 'Insurance Guides - coverinsight.com')"></title>
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+    <link rel="alternate" href="{{ url()->current() }}" hreflang="en" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg') }}" color="#0d6efd">
+    <meta name="msapplication-TileColor" content="#0d6efd">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [{
+                    "@type": "WebSite",
+                    "@id": "{{ url('/') }}#website",
+                    "url": "{{ url('/') }}",
+                    "name": "coverinsight.com",
+                    "description": "Insurance Information and comparisons for health, auto, home and life coverage",
+                    "publisher": {
+                        "@id": "{{ url('/') }}#organization"
+                    },
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": "{{ url('/search?q={search_term_string}') }}",
+                        "query-input": "required name=search_term_string"
+                    }
+                },
+                {
+                    "@type": "Organization",
+                    "@id": "{{ url('/') }}#organization",
+                    "name": "coverinsight.com",
+                    "url": "{{ url('/') }}",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "{{ asset('images/logo.png') }}"
+                    },
+                    "sameAs": [
+                        "https://facebook.com/coverinsight",
+                        "https://twitter.com/coverinsight",
+                        "https://instagram.com/coverinsight"
+                    ]
+                },
+                {
+                    "@type": "CollectionPage",
+                    "@id": "{{ url()->current() }}#webpage",
+                    "url": "{{ url()->current() }}",
+                    "name": "@yield('title', $meta['title'] ?? 'Insurance Information & Comparisons 2025')",
+                    "description": "@yield('description', $meta['description'] ?? 'Expert Insurance Information and coverage comparisons')",
+                    "isPartOf": {
+                        "@id": "{{ url('/') }}#website"
+                    },
+                    "breadcrumb": {
+                        "@id": "{{ url()->current() }}#breadcrumb"
+                    }
+                },
+                {
+                    "@type": "BreadcrumbList",
+                    "@id": "{{ url()->current() }}#breadcrumb",
+                    "itemListElement": [{
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": "{{ url('/') }}"
+                        }
+                        @if(request('category')), {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "{{ $currentCategory->name ?? 'Category' }}",
+                            "item": "{{ url()->current() }}"
+                        }
+                        @endif
+                    ]
+                }
+            ]
+        }
+    </script>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,23 +120,8 @@
 
     <!-- Custom CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Schema.org markup for Google -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Insurance Guides",
-            "url": "{{ url('/') }}",
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "{{ url('/search') }}?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        }
-    </script>
-
-    @yield('head')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -143,7 +207,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <h5 class="fw-bold">Insurance Guides</h5>
+                    <h5 class="fw-bold">Insurance Information</h5>
                     <p>Your trusted resource for insurance information and calculate your insurance.</p>
                     <div class="social-icons">
                         <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
