@@ -82,7 +82,7 @@ class SitemapController extends Controller
             $xml .= "    <loc>$url</loc>\n";
             $xml .= "    <lastmod>$now</lastmod>\n";
             $xml .= "    <changefreq>monthly</changefreq>\n";
-            $xml .= "    <priority>0.5</priority>\n";
+            $xml .= "    <priority>0.8</priority>\n";
             $xml .= "  </sitemap>\n";
         }
 
@@ -92,8 +92,8 @@ class SitemapController extends Controller
             $xml .= "  <sitemap>\n";
             $xml .= "    <loc>$url</loc>\n";
             $xml .= "    <lastmod>$now</lastmod>\n";
-            $xml .= "    <changefreq>monthly</changefreq>\n";
-            $xml .= "    <priority>0.5</priority>\n";
+            $xml .= "    <changefreq>weekly</changefreq>\n";
+            $xml .= "    <priority>0.7</priority>\n";
             $xml .= "  </sitemap>\n";
         }
 
@@ -107,15 +107,16 @@ class SitemapController extends Controller
                 $xml .= "    <loc>$url</loc>\n";
                 $xml .= "    <lastmod>$lastmod</lastmod>\n";
                 $xml .= "    <changefreq>monthly</changefreq>\n";
-                $xml .= "    <priority>0.5</priority>\n";
+                $xml .= "    <priority>0.6</priority>\n";
                 $xml .= "  </sitemap>\n";
             }
         }
 
-        // Artikel per Batch
+        // Sitemap Artikel per Batch
         $totalArticles = InsuranceArticle::count();
         $perPage = 1000;
         $totalPages = ceil($totalArticles / $perPage);
+
         for ($i = 1; $i <= $totalPages; $i++) {
             $url = url("/sitemap-articles-$i.xml");
             $lastArticle = InsuranceArticle::orderBy('updated_at', 'desc')
@@ -127,7 +128,7 @@ class SitemapController extends Controller
             $xml .= "  <sitemap>\n";
             $xml .= "    <loc>$url</loc>\n";
             $xml .= "    <lastmod>$lastmod</lastmod>\n";
-            $xml .= "    <changefreq>monthly</changefreq>\n";
+            $xml .= "    <changefreq>weekly</changefreq>\n";
             $xml .= "    <priority>0.5</priority>\n";
             $xml .= "  </sitemap>\n";
         }
