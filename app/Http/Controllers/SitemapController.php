@@ -81,6 +81,8 @@ class SitemapController extends Controller
             $xml .= "  <sitemap>\n";
             $xml .= "    <loc>$url</loc>\n";
             $xml .= "    <lastmod>$now</lastmod>\n";
+            $xml .= "    <changefreq>monthly</changefreq>\n";
+            $xml .= "    <priority>0.5</priority>\n";
             $xml .= "  </sitemap>\n";
         }
 
@@ -90,6 +92,8 @@ class SitemapController extends Controller
             $xml .= "  <sitemap>\n";
             $xml .= "    <loc>$url</loc>\n";
             $xml .= "    <lastmod>$now</lastmod>\n";
+            $xml .= "    <changefreq>monthly</changefreq>\n";
+            $xml .= "    <priority>0.5</priority>\n";
             $xml .= "  </sitemap>\n";
         }
 
@@ -102,11 +106,13 @@ class SitemapController extends Controller
                 $xml .= "  <sitemap>\n";
                 $xml .= "    <loc>$url</loc>\n";
                 $xml .= "    <lastmod>$lastmod</lastmod>\n";
+                $xml .= "    <changefreq>monthly</changefreq>\n";
+                $xml .= "    <priority>0.5</priority>\n";
                 $xml .= "  </sitemap>\n";
             }
         }
 
-        // Artikel sitemap per batch
+        // Artikel per Batch
         $totalArticles = InsuranceArticle::count();
         $perPage = 1000;
         $totalPages = ceil($totalArticles / $perPage);
@@ -121,6 +127,8 @@ class SitemapController extends Controller
             $xml .= "  <sitemap>\n";
             $xml .= "    <loc>$url</loc>\n";
             $xml .= "    <lastmod>$lastmod</lastmod>\n";
+            $xml .= "    <changefreq>monthly</changefreq>\n";
+            $xml .= "    <priority>0.5</priority>\n";
             $xml .= "  </sitemap>\n";
         }
 
