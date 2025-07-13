@@ -9,19 +9,12 @@ use App\Models\InsuranceCategory;
 
 class SitemapController extends Controller
 {
-    /**
-     * Sitemap Index - /sitemap.xml
-     */
     public function index()
     {
         $xml = $this->generateSitemapIndex();
-
         return response($xml, 200)->header('Content-Type', 'application/xml');
     }
 
-    /**
-     * Sitemap Artikel per Halaman - /sitemap-articles-{page}.xml
-     */
     public function articles($page)
     {
         $perPage = 1000;
@@ -54,32 +47,22 @@ class SitemapController extends Controller
         return response($xml, 200)->header('Content-Type', 'application/xml');
     }
 
-    /**
-     * Simpan ke public/sitemap.xml jika diperlukan
-     */
     public function generateAndSave()
     {
         $xml = $this->generateSitemapIndex();
-
         File::put(public_path('sitemap.xml'), $xml);
-
         return response()->json(['message' => '✅ sitemap.xml disimpan di public/sitemap.xml']);
     }
 
-    /**
-     * Dapatkan kode negara valid
-     */
     private function getValidCountries(): array
     {
         return ['us', 'gb', 'ca', 'au', 'de', 'jp'];
     }
 
-    /**
-     * Generate sitemap index XML content
-     */
     private function generateSitemapIndex(): string
     {
         $countries = $this->getValidCountries();
+        $now = Carbon::now()->toAtomString();
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
@@ -95,33 +78,53 @@ class SitemapController extends Controller
             url('/policies/dmca'),
         ];
         foreach ($staticPages as $url) {
-            $xml .= "  <sitemap><loc>$url</loc></sitemap>\n";
+            $xml .= "  <sitemap>\n";
+            $xml .= "    <loc>$url</loc>\n";
+            $xml .= "    <lastmod>$now</lastmod>\n";
+            $xml .= "  </sitemap>\n";
         }
 
         // Country Pages
         foreach ($countries as $country) {
-            $xml .= "  <sitemap><loc>" . url("/$country") . "</loc></sitemap>\n";
+            $url = url("/$country");
+            $xml .= "  <sitemap>\n";
+            $xml .= "    <loc>$url</loc>\n";
+            $xml .= "    <lastmod>$now</lastmod>\n";
+            $xml .= "  </sitemap>\n";
         }
 
         // Category Pages per Country
-        $categories = InsuranceCategory::select('slug')->get();
+        $categories = InsuranceCategory::select('slug', 'updated_at')->get();
         foreach ($countries as $country) {
             foreach ($categories as $category) {
-                $xml .= "  <sitemap><loc>" . url("/$country/category/{$category->slug}") . "</loc></sitemap>\n";
+                $url = url("/$country/category/{$category->slug}");
+                $lastmod = Carbon::parse($category->updated_at ?? now())->toAtomString();
+                $xml .= "  <sitemap>\n";
+                $xml .= "    <loc>$url</loc>\n";
+                $xml .= "    <lastmod>$lastmod</lastmod>\n";
+                $xml .= "  </sitemap>\n";
             }
         }
 
-        // Artikel per Batch
+        // Artikel sitemap per batch
         $totalArticles = InsuranceArticle::count();
         $perPage = 1000;
         $totalPages = ceil($totalArticles / $perPage);
-
         for ($i = 1; $i <= $totalPages; $i++) {
-            $xml .= "  <sitemap><loc>" . url("/sitemap-articles-$i.xml") . "</loc></sitemap>\n";
+            $url = url("/sitemap-articles-$i.xml");
+            $lastArticle = InsuranceArticle::orderBy('updated_at', 'desc')
+                ->skip(($i - 1) * $perPage)
+                ->take(1)
+                ->first();
+            $lastmod = $lastArticle ? Carbon::parse($lastArticle->updated_at)->toAtomString() : $now;
+
+            $xml .= "  <sitemap>\n";
+            $xml .= "    <loc>$url</loc>\n";
+            $xml .= "    <lastmod>$lastmod</lastmod>\n";
+            $xml .= "  </sitemap>\n";
         }
 
         $xml .= '</sitemapindex>';
-
         return $xml;
     }
 }
