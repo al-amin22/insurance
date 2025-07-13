@@ -240,7 +240,6 @@
                     </ul>
                 </div>
 
-
                 <div class="col-md-4 mb-3">
                     <h5 class="fw-bold">Newsletter</h5>
                     <p>Subscribe to get insurance tips and updates</p>

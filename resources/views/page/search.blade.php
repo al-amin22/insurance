@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Search Insurance Guides - SoundEffectsFree.com')
+@section('title', 'Search Insurance Guides - coversinsight.com')
 @section('meta_description', 'Search our comprehensive insurance guides and comparisons')
 @section('meta_keywords', 'search insurance, find insurance guides, insurance comparison')
 

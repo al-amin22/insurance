@@ -214,11 +214,11 @@ use Illuminate\Support\Str;
             "image": "{{ asset($article->image_path) }}",
             "author": {
                 "@type": "Organization",
-                "name": "SoundEffectsFree.com"
+                "name": "coverinsight.com"
             },
             "publisher": {
                 "@type": "Organization",
-                "name": "SoundEffectsFree.com",
+                "name": "coverinsight.com",
                 "logo": {
                     "@type": "ImageObject",
                     "url": "{{ asset('images/logo.png') }}"
