@@ -9,12 +9,18 @@ use App\Models\InsuranceCategory;
 
 class SitemapController extends Controller
 {
+    /**
+     * Sitemap Index - /sitemap.xml
+     */
     public function index()
     {
         $xml = $this->generateSitemapIndex();
         return response($xml, 200)->header('Content-Type', 'application/xml');
     }
 
+    /**
+     * Sitemap Artikel per Halaman - /sitemap-articles-{page}.xml
+     */
     public function articles($page)
     {
         $perPage = 1000;
@@ -47,18 +53,27 @@ class SitemapController extends Controller
         return response($xml, 200)->header('Content-Type', 'application/xml');
     }
 
+    /**
+     * Optional: Simpan sitemap ke file (public/sitemap.xml)
+     */
     public function generateAndSave()
     {
         $xml = $this->generateSitemapIndex();
         File::put(public_path('sitemap.xml'), $xml);
-        return response()->json(['message' => '✅ sitemap.xml disimpan di public/sitemap.xml']);
+        return response()->json(['message' => '✅ sitemap.xml disimpan di public/']);
     }
 
+    /**
+     * Kode negara yang didukung
+     */
     private function getValidCountries(): array
     {
         return ['us', 'gb', 'ca', 'au', 'de', 'jp'];
     }
 
+    /**
+     * Generate sitemap index (utama)
+     */
     private function generateSitemapIndex(): string
     {
         $countries = $this->getValidCountries();
@@ -102,7 +117,7 @@ class SitemapController extends Controller
         foreach ($countries as $country) {
             foreach ($categories as $category) {
                 $url = url("/$country/category/{$category->slug}");
-                $lastmod = Carbon::parse($category->updated_at ?? now())->toAtomString();
+                $lastmod = Carbon::parse($category->updated_at ?? $now)->toAtomString();
                 $xml .= "  <sitemap>\n";
                 $xml .= "    <loc>$url</loc>\n";
                 $xml .= "    <lastmod>$lastmod</lastmod>\n";
@@ -112,7 +127,7 @@ class SitemapController extends Controller
             }
         }
 
-        // Sitemap Artikel per Batch
+        // Artikel Sitemap per Page
         $totalArticles = InsuranceArticle::count();
         $perPage = 1000;
         $totalPages = ceil($totalArticles / $perPage);

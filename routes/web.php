@@ -53,7 +53,7 @@ Route::prefix('contact')->group(function () {
 });
 // Static pages
 Route::get('/about', function () {
-    return view('about');
+    return view('page.about');
 })->name('about');
 
 // Legal Pages
