@@ -120,6 +120,9 @@
 
     <!-- Custom CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9778807635336222"
+        crossorigin="anonymous"></script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
