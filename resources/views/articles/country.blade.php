@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Insurance Guides for ' . strtoupper($country) . ' - coverinsight.com')
+@section('title', 'Insurance Information ' . strtoupper($country) . ' - coverinsight.com')
 @section('meta_description', 'Comprehensive insurance guides and comparisons for ' . strtoupper($country) . '. Find the best coverage options in your country.')
 @section('meta_keywords', strtolower($country) . ' insurance, ' . strtolower($country) . ' insurance guides, insurance in ' . strtolower($country))
 
