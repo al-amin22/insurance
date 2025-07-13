@@ -235,6 +235,8 @@
                         <li><a href="{{ route('terms') }}" class="text-white-50">Terms of Use</a></li>
                         <li><a href="{{ route('licensing') }}" class="text-white-50">Licensing</a></li>
                         <li><a href="{{ route('dmca') }}" class="text-white-50">DMCA</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-white-50">Contact Us</a></li>
+                        <li><a href="{{ route('about') }}" class="text-white-50">About</a></li>
                     </ul>
                 </div>
 
