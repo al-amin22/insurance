@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Primary Meta Tags -->
-    <title>@yield('title', $meta['title'] ?? 'Insurance Information & Simple Insurance 2025')</title>
+    <title>@yield('title', $meta['title'] ?? 'Insurance Information & Simple Insurance 2025') – coverinsight.com</title>
     <meta name="description" content="@yield('description', $meta['description'] ?? 'insurance Information, Simple Insurance, comparisons and expert tips for health, auto, home and life insurance. Get the best coverage advice for 2025.')">
     <meta name="keywords" content="@yield('keywords', $meta['keywords'] ?? 'Insurance Information, health insurance, car insurance, home insurance, life insurance, insurance comparison, pet insurance, travel insurance, disability insurance, leability insurance, best insurance 2025, coverage advice, tips insurance, news insurance')">
     <meta name="author" content="coverinsight.com">
@@ -81,7 +81,7 @@
                     "@type": "CollectionPage",
                     "@id": "{{ url()->current() }}#webpage",
                     "url": "{{ url()->current() }}",
-                    "name": "@yield('title', $meta['title'] ?? 'Insurance Information & Comparisons 2025')",
+                    "name": "@yield('title', $meta['title'] ?? 'Insurance Information & Comparisons')",
                     "description": "@yield('description', $meta['description'] ?? 'Expert Insurance Information and coverage comparisons')",
                     "isPartOf": {
                         "@id": "{{ url('/') }}#website"
