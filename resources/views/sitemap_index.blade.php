@@ -1,60 +1,86 @@
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    {{-- Static Pages --}}
     <url>
         <loc>{{ url('/') }}</loc>
-        <changefreq>monthly</changefreq>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>{{ url('/about') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>{{ url('/contact') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>{{ url('/policies/privacy') }}</loc>
-        <changefreq>yearly</changefreq>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>{{ url('/policies/terms') }}</loc>
-        <changefreq>yearly</changefreq>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>{{ url('/policies/licensing') }}</loc>
-        <changefreq>yearly</changefreq>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>{{ url('/policies/dmca') }}</loc>
-        <changefreq>yearly</changefreq>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
 
-    {{-- Country & category --}}
+    {{-- Country pages --}}
     @foreach ($countries as $country)
-    <sitemap>
+    <url>
         <loc>{{ url(strtolower($country)) }}</loc>
-        <lastmod>{{ $now }}</lastmod>
-    </sitemap>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    @endforeach
+
+    {{-- Category per country --}}
+    @foreach ($countries as $country)
     @foreach ($categories as $category)
-    <sitemap>
+    <url>
         <loc>{{ url(strtolower($country) . '/category/' . $category->slug) }}</loc>
+        @if($category->updated_at)
         <lastmod>{{ \Carbon\Carbon::parse($category->updated_at)->toAtomString() }}</lastmod>
-    </sitemap>
+        @endif
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
     @endforeach
     @endforeach
 
-    {{-- Article sitemap pages --}}
-    @for ($i = 1; $i <= $totalPages; $i++)
-        <sitemap>
-        <loc>{{ url("/sitemap-articles-$i.xml") }}</loc>
-        <lastmod>{{ $now }}</lastmod>
-        </sitemap>
-        @endfor
-</sitemapindex>
+    {{-- Articles --}}
+    @foreach ($articles as $article)
+    @if($article->category && $article->slug && $article->country)
+    <url>
+        <loc>{{ url(strtolower($article->country) . '/' . $article->category->slug . '/' . $article->slug) }}</loc>
+        @if($article->updated_at)
+        <lastmod>{{ \Carbon\Carbon::parse($article->updated_at)->toAtomString() }}</lastmod>
+        @endif
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    @endif
+    @endforeach
+
+</urlset>

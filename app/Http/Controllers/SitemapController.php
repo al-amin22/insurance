@@ -15,21 +15,18 @@ class SitemapController extends Controller
 
     public function index()
     {
+        $articles = InsuranceArticle::with('category')
+            ->orderBy('updated_at', 'desc')
+            ->take(10000)
+            ->get();
+
+        $categories = InsuranceCategory::all();
         $countries = ['us', 'gb', 'ca', 'au', 'de', 'jp'];
-        $categories = InsuranceCategory::select('slug', 'updated_at')->get();
-        $now = now()->toAtomString();
 
-        $totalArticles = InsuranceArticle::count();
-        $perPage = 1000;
-        $totalPages = ceil($totalArticles / $perPage);
-
-        return response()->view('sitemap_index', compact(
-            'countries',
-            'categories',
-            'totalPages',
-            'now'
-        ))->header('Content-Type', 'application/xml');
+        return response()->view('sitemap_index', compact('articles', 'categories', 'countries'))
+            ->header('Content-Type', 'application/xml');
     }
+
 
     public function articles($page)
     {
