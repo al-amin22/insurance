@@ -132,6 +132,16 @@ class ArticleController extends Controller
             ->orderBy('articles_count', 'desc')
             ->get();
 
+        // Build structured-data parts for JSON-LD
+        $hasPart = $categories->map(function ($cat) use ($country) {
+            return [
+                "@type"       => "WebPage",
+                "name"        => "{$cat->name} Insurance in " . strtoupper($country),
+                "url"         => route('categories.show', ['country' => $country, 'slug' => $cat->slug]),
+                "description" => "{$cat->name} insurance information and guides for " . strtoupper($country),
+            ];
+        })->toArray();
+
         // Get latest 6 articles
         $latestArticles = InsuranceArticle::where('country', strtoupper($country))
             ->with('category')
@@ -147,12 +157,13 @@ class ArticleController extends Controller
             ->get();
 
         return view('articles.country', [
-            'articles' => $articles,
-            'country' => $country, // lowercase for URLs
-            'countryName' => $countryName, // uppercase for display
-            'categories' => $categories,
+            'articles'       => $articles,
+            'country'        => $country,        // lowercase for URLs
+            'countryName'    => $countryName,    // uppercase for display
+            'categories'     => $categories,
             'latestArticles' => $latestArticles,
-            'popularArticles' => $popularArticles
+            'popularArticles' => $popularArticles,
+            'hasPart'        => $hasPart,        // structured-data parts for JSON-LD
         ]);
     }
 
