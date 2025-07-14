@@ -148,6 +148,7 @@
                         <div class="icon-wrapper bg-primary bg-opacity-10 text-primary rounded-circle mx-auto mb-3" style="width: 60px; height: 60px; line-height: 60px;">
                             <i class="{{ $icon }} fs-4"></i>
                         </div>
+
                         <h3 class="h6 mb-1">{{ $category->name }}</h3>
                         <small class="text-muted">{{ $category->articles_count }} expert guides</small>
                     </div>
