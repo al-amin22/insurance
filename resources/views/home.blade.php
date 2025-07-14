@@ -129,18 +129,18 @@
                     <div class="card-body text-center">
                         @php
                         $icon = match(true) {
-                        str_contains(strtolower($category->name), 'health') => 'fas fa-heartbeat',
-                        str_contains(strtolower($category->name), 'auto') || str_contains(strtolower($category->name), 'car') => 'fas fa-car',
-                        str_contains(strtolower($category->name), 'home') || str_contains(strtolower($category->name), 'property') => 'fas fa-home',
-                        str_contains(strtolower($category->name), 'life') => 'fas fa-shield-alt',
-                        str_contains(strtolower($category->name), 'travel') => 'fas fa-plane',
-                        str_contains(strtolower($category->name), 'pet') => 'fas fa-paw',
-                        str_contains(strtolower($category->name), 'business') => 'fas fa-briefcase',
-                        str_contains(strtolower($category->name), 'liability') => 'fas fa-balance-scale',
-                        str_contains(strtolower($category->name), 'disability') => 'fas fa-wheelchair',
-                        str_contains(strtolower($category->name), 'comparison') => 'fas fa-exchange-alt',
-                        str_contains(strtolower($category->name), 'tips') => 'fas fa-lightbulb',
-                        str_contains(strtolower($category->name), 'news') => 'fas fa-newspaper',
+                        str_contains(strtolower($category->name), 'health') || str_contains($category->slug, 'health') => 'fas fa-heartbeat',
+                        str_contains(strtolower($category->name), 'auto') || str_contains(strtolower($category->name), 'car') || str_contains($category->slug, 'auto') || str_contains($category->slug, 'car') => 'fas fa-car',
+                        str_contains(strtolower($category->name), 'home') || str_contains($category->slug, 'home') || str_contains(strtolower($category->name), 'property') => 'fas fa-home',
+                        str_contains(strtolower($category->name), 'life') || str_contains($category->slug, 'life') => 'fas fa-shield-alt',
+                        str_contains(strtolower($category->name), 'travel') || str_contains($category->slug, 'travel') => 'fas fa-plane',
+                        str_contains(strtolower($category->name), 'pet') || str_contains($category->slug, 'pet') => 'fas fa-paw',
+                        str_contains(strtolower($category->name), 'business') || str_contains($category->slug, 'business') => 'fas fa-briefcase',
+                        str_contains(strtolower($category->name), 'liability') || str_contains($category->slug, 'liability') => 'fas fa-balance-scale',
+                        str_contains(strtolower($category->name), 'disability') || str_contains($category->slug, 'disability') => 'fas fa-wheelchair',
+                        str_contains(strtolower($category->name), 'comparison') || str_contains($category->slug, 'comparison') => 'fas fa-exchange-alt',
+                        str_contains(strtolower($category->name), 'tips') || str_contains($category->slug, 'tips') => 'fas fa-lightbulb',
+                        str_contains(strtolower($category->name), 'news') || str_contains($category->slug, 'news') => 'fas fa-newspaper',
                         default => 'fas fa-file-alt'
                         };
                         @endphp
