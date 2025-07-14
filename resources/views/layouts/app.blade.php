@@ -290,6 +290,8 @@
                         <li><a href="{{ route('articles.by_country', 'gb') }}" class="text-white-50">United Kingdom</a></li>
                         <li><a href="{{ route('articles.by_country', 'ca') }}" class="text-white-50">Canada</a></li>
                         <li><a href="{{ route('articles.by_country', 'au') }}" class="text-white-50">Australia</a></li>
+                        <li><a href="{{ route('articles.by_country', 'de') }}" class="text-white-50">Germany</a></li>
+                        <li><a href="{{ route('articles.by_country', 'jp') }}" class="text-white-50">Japan</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 mb-3">
