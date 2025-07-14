@@ -4,7 +4,15 @@
 @section('meta_description', 'Trusted insurance guides for health, auto, home, and life insurance in US, UK, Canada, Australia, Germany & Japan. Expert comparisons to help you save.')
 @section('meta_keywords', 'insurance guide, compare insurance, health insurance, car insurance, home insurance, life insurance, insurance tips, US insurance, UK insurance, Canada insurance')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="..." crossorigin="anonymous">
-
+<style>
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
 @section('content')
 <!-- Hero Section with Insurance Focus -->
 <section class="hero-section bg-primary text-white py-5">
@@ -145,9 +153,10 @@
                         default => 'fas fa-file-alt'
                         };
                         @endphp
-                        <div class="icon-wrapper bg-primary bg-opacity-10 text-primary rounded-circle mx-auto mb-3" style="width: 60px; height: 60px; line-height: 60px;">
+                        <div class="icon-wrapper bg-primary bg-opacity-10 text-primary rounded-circle mx-auto mb-3">
                             <i class="{{ $icon }} fs-4"></i>
                         </div>
+
 
                         <h3 class="h6 mb-1">{{ $category->name }}</h3>
                         <small class="text-muted">{{ $category->articles_count }} expert guides</small>
