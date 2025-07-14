@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Insurance Information - coverinsight.com')
+@section('title', 'Insurance Information &amp; Simple Insurance 2025')
 @section('meta_description', 'Trusted insurance guides for health, auto, home, and life insurance in US, UK, Canada, Australia, Germany & Japan. Expert comparisons to help you save.')
 @section('meta_keywords', 'insurance guide, compare insurance, health insurance, car insurance, home insurance, life insurance, insurance tips, US insurance, UK insurance, Canada insurance')
 

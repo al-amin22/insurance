@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Privacy Policy - CoverInsight')
+@section('title', 'Privacy Policy')
 @section('meta_description', 'How we protect your information while providing insurance research and comparison services')
 @section('meta_keywords', 'insurance privacy policy, data protection insurance, insurance data security')
 

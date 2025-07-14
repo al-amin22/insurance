@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Terms of Use - CoverInsight')
+@section('title', 'Terms of Use')
 @section('meta_description', 'Terms governing your use of our insurance research and comparison services')
 @section('meta_keywords', 'insurance terms, research terms, comparison tool terms')
 

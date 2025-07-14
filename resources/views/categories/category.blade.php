@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $category->name . ' Insurance Information - – coverinsight.com')
+@section('title', e($category->name . ' Insurance Information'))
 @section('meta_description', 'Comprehensive guides about ' . $category->name . ' insurance. Compare options and find the best coverage for your needs.')
 @section('meta_keywords', $category->name . ' insurance, ' . strtolower($category->name) . ' coverage, ' . strtolower($category->name) . ' policy')
 

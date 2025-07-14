@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Content Licensing & Attribution - CoverInsight')
+@section('title', 'Content Licensing &amp; Attribution - CoverInsight')
 @section('meta_description', 'Information about third-party resources used in our insurance research and how to properly cite our work')
 @section('meta_keywords', 'insurance research attribution, content licensing, research methodology')
 
