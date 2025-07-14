@@ -17,7 +17,7 @@ class HomeController extends Controller
 
         $categories = InsuranceCategory::withCount('articles')
             ->orderBy('visit_count', 'desc')
-            ->limit(8)
+            ->limit(12)
             ->get();
 
         return view('home', compact('popularArticles', 'categories'));
