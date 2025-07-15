@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', e($category->name . ' Insurance Information - ' . strtoupper($country) . ' Guide'))
+@section('title', e($category->name . ' Insurance Guide for ' . strtoupper($country)))
 @section('meta_description', 'Comprehensive guides about ' . $category->name . ' insurance in ' . strtoupper($country) . '. Compare options and find the best coverage for your needs.')
 @section('meta_keywords', $category->name . ' insurance, ' . strtolower($category->name) . ' coverage, ' . strtolower($category->name) . ' policy, ' . strtolower($country) . ' insurance')
 

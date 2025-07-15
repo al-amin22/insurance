@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Primary Meta Tags -->
-    <title>@yield('title', 'Insurance Information') – coverinsight.com</title>
+    <title>@yield('title', 'Insurance Information') | CoverInsight</title>
     <meta name="description" content="{{ $article->description ?? 'Insurance Information, Simple Insurance, comparisons and expert tips for health, auto, home and life insurance. Get the best coverage advice for 2025.' }}">
     <meta name="keywords" content="{{ $article->keywords ?? 'Insurance Information, health insurance, car insurance, home insurance, life insurance, insurance comparison, pet insurance, travel insurance, disability insurance, leability insurance, best insurance 2025, coverage advice, tips insurance, news insurance' }}">
     <meta name="author" content="coverinsight.com">
