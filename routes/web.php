@@ -28,7 +28,7 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
 Route::get('/search', [ArticleController::class, 'search'])->name('search');
 
 // Article routes
-Route::prefix('{country}')->group(function () {
+Route::prefix('{country}')->where(['country' => '[a-z]{2}'])->group(function () {
     // Articles by country
     Route::get('/', [ArticleController::class, 'byCountry'])
         ->where('country', '[a-z]{2}')
